@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Ex-Dividend Date Lookup</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="jquery.js"></script>
+	
+  </head>
+
+
+<body>
+<div id="content">
+	<div id="searchdiv">
+		<input type="text" id="symbol" class="searchbox" placeholder="IBM,AAPL"/>
+		<button type="submit" id="form-input-submit" class="searchbutton">Lookup Symbol(s)</button>
+		<div id = "other-options-div">
+			<button id="get-from-page" class="astext">Search on Current Tab</button>
+			|
+			<button id="search-portfolio-link" class="astext">Search Saved Portfolio</button>
+		</div>
+	</div>
+	<div class="resultsTable">
+		<table id="symbols">
+
+		</table>
+	</div>
+	<div class="footer">
+		© 2016 -
+		<a href="options.html">Extension options</a>
+		-
+		<a href="notice.html">Notice</a>
+		<a href="https://www.yahoo.com/?ilc=401" target="_blank"> <img src="https://poweredby.yahoo.com/purple.png" width="134" height="29" /> </a>
+	</div>
+</div>
+<script src="index.js"></script>
+</body>
+
+</html>
+

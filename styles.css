@@ -1,0 +1,59 @@
+	#greencell {
+	background-color: green;
+	}
+
+	body {
+	font-family: Arial, Helvetica, sans-serif;
+	min-width:420px;
+	min-height:72px;
+	}
+	.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 29px;
+	text-align: center;
+	padding-top: 5px;
+}
+	td {
+    height: 24px;
+    vertical-align: center;
+	text-align: center;
+}
+	.searchbox {
+	width: 200px;
+	height: 20px;
+	
+	}
+	.searchbutton {
+	padding: 3px;
+	
+	}
+	#searchdiv {
+	padding-top: 12px;
+	text-align: center;
+	}
+	.resultsTable {
+		padding-bottom: 12px;
+	}
+	#other-options-div{
+	padding-top: 3px;
+	}
+	.astext {
+    background:none;
+    border:none;
+    margin:0;
+    padding:0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	
+	}
+	.astext:hover{
+	text-decoration: underline;
+	cursor: pointer;
+	cursor: hand;
+	}
+	#status {
+	padding-top: 2px;
+	}
+	
