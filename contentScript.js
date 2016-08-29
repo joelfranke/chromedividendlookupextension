@@ -1,7 +1,7 @@
 //Capture the body of the page as text
 var pageContent = $('body').text();
 
-// RegEx to evaluate body against
+// RegEx to evaluate body against, needs work
 var regEx = /.+[\\\/|\/|=]\b([A-Z]{1,4})\b[^\-\>\/\<\ \=]|\"\)\s\(([A-Z]{1,4})\)|[^>]\b([A-Z]{1,4})[\=|\:|\. ]{1,2}[A-Z]{1,6}[^\.\,\;\-\>\< ]\b/g;
 
 //Evaluate body
