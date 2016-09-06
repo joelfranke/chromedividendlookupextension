@@ -64,7 +64,7 @@ jQuery.getJSON(apiUrl, function(data) {
 			return true;
 		} else {tableSymbolsArray.push(symbolForLink);}
 
-      var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
+      var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
 
       var quarterlyDividend = "$" + item.DividendShare / 4;
 
@@ -145,7 +145,7 @@ var symbolForLink = JSON.stringify(item.Symbol);
 		
   }
      
-	 var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
+	 var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
 
       var quarterlyDividend = "$" + item.DividendShare / 4;
 
@@ -223,7 +223,7 @@ var symbolForLink = JSON.stringify(item.Symbol);
 		
   }
      
-	 var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
+	 var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
 
       var quarterlyDividend = "$" + item.DividendShare / 4;
 
