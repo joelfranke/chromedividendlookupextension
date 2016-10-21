@@ -153,7 +153,6 @@ var symbolForLink = JSON.stringify(item.Symbol);
 		
   }
      
-	 var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
 
       var quarterlyDividend = "$" + item.DividendShare / 4;
 
@@ -164,6 +163,12 @@ var symbolForLink = JSON.stringify(item.Symbol);
 	var chg50 = JSON.stringify(item.ChangeFromFiftydayMovingAverage);
 	var pctChg50 = JSON.stringify(item.PercentChangeFromFiftydayMovingAverage);
 	var priceUpdated = JSON.stringify(item.LastTradeDate + " - " +item.LastTradeTime);	
+	
+	//build this out with html/css to show data in popup
+	var popupInfo = "<span>"+nameForLink+"</br>"+symbolForLink+"</br>"+lastPrice+"</span>";
+	
+	
+	var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + popupInfo +"</a>" + "</td>";
 	console.log(priceUpdated);
       //logic for date check to highlight cells using greencell id via css
       if (date >= today) {
