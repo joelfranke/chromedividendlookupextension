@@ -44,6 +44,7 @@ jQuery.getJSON(apiUrl, function(data) {
 
     var nameForLink = item.Name;
 
+
     // Check for valid symbols and set checkItems, otherwise break loop
     var symbolForLink = JSON.stringify(item.Symbol);  
 	if (nameForLink == null) {
@@ -69,7 +70,14 @@ jQuery.getJSON(apiUrl, function(data) {
       var quarterlyDividend = "$" + item.DividendShare / 4;
 
       var date = Date.parse(item.ExDividendDate);
-	  
+	var lastPrice = JSON.stringify(item.LastTradePriceOnly);
+	var chg200 = JSON.stringify(item.ChangeFromTwoHundreddayMovingAverage);
+	var pctChg200 = JSON.stringify(item.PercentChangeFromTwoHundreddayMovingAverage);
+	var chg50 = JSON.stringify(item.ChangeFromFiftydayMovingAverage);
+	var pctChg50 = JSON.stringify(item.PercentChangeFromFiftydayMovingAverage);
+	var priceUpdated = JSON.stringify(item.LastTradeDate + " - " + item.LastTradeTime);	
+	console.log(priceUpdated);
+		
 
       //logic for date check to highlight cells using greencell id via css
       if (date >= today) {
@@ -150,7 +158,13 @@ var symbolForLink = JSON.stringify(item.Symbol);
       var quarterlyDividend = "$" + item.DividendShare / 4;
 
       var date = Date.parse(item.ExDividendDate);
-
+	var lastPrice = JSON.stringify(item.LastTradePriceOnly);
+	var chg200 = JSON.stringify(item.ChangeFromTwoHundreddayMovingAverage);
+	var pctChg200 = JSON.stringify(item.PercentChangeFromTwoHundreddayMovingAverage);
+	var chg50 = JSON.stringify(item.ChangeFromFiftydayMovingAverage);
+	var pctChg50 = JSON.stringify(item.PercentChangeFromFiftydayMovingAverage);
+	var priceUpdated = JSON.stringify(item.LastTradeDate + " - " +item.LastTradeTime);	
+	console.log(priceUpdated);
       //logic for date check to highlight cells using greencell id via css
       if (date >= today) {
         var divDateRow = "<td id='greencell'>"  + item.ExDividendDate + "</td>";
@@ -228,7 +242,13 @@ var symbolForLink = JSON.stringify(item.Symbol);
       var quarterlyDividend = "$" + item.DividendShare / 4;
 
       var date = Date.parse(item.ExDividendDate);
-
+	var lastPrice = JSON.stringify(item.LastTradePriceOnly);
+	var chg200 = JSON.stringify(item.ChangeFromTwoHundreddayMovingAverage);
+	var pctChg200 = JSON.stringify(item.PercentChangeFromTwoHundreddayMovingAverage);
+	var chg50 = JSON.stringify(item.ChangeFromFiftydayMovingAverage);
+	var pctChg50 = JSON.stringify(item.PercentChangeFromFiftydayMovingAverage);
+	var priceUpdated = JSON.stringify(item.LastTradeDate + " - " +item.LastTradeTime);	
+	console.log(priceUpdated);
       //logic for date check to highlight cells using greencell id via css
       if (date >= today) {
         var divDateRow = "<td id='greencell'>"  + item.ExDividendDate + "</td>";
