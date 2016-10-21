@@ -157,15 +157,19 @@ var symbolForLink = JSON.stringify(item.Symbol);
       var quarterlyDividend = "$" + item.DividendShare / 4;
 
       var date = Date.parse(item.ExDividendDate);
-	var lastPrice = JSON.stringify(item.LastTradePriceOnly);
-	var chg200 = JSON.stringify(item.ChangeFromTwoHundreddayMovingAverage);
-	var pctChg200 = JSON.stringify(item.PercentChangeFromTwoHundreddayMovingAverage);
-	var chg50 = JSON.stringify(item.ChangeFromFiftydayMovingAverage);
-	var pctChg50 = JSON.stringify(item.PercentChangeFromFiftydayMovingAverage);
-	var priceUpdated = JSON.stringify(item.LastTradeDate + " - " +item.LastTradeTime);	
+	var lastPrice = item.LastTradePriceOnly;
+	var change = item.Change;
+	var pctChange = item.ChangeinPercent;
+	var chg200 = item.ChangeFromTwoHundreddayMovingAverage;
+	var pctChg200 = item.PercentChangeFromTwoHundreddayMovingAverage;
+	var chg50 = item.ChangeFromFiftydayMovingAverage;
+	var pctChg50 = item.PercentChangeFromFiftydayMovingAverage;
+	var priceUpdated = item.LastTradeDate + " - " +item.LastTradeTime;	
+	var worthYourWhilePosition = lastPrice/(item.DividendShare / 4);
+	var worthYourWhilePositionOutlay = worthYourWhilePosition * lastPrice;
 	
 	//build this out with html/css to show extra data (including worth your while position) in popup
-	var popupInfo = "<span>"+nameForLink+"</br>"+symbolForLink+"</br>"+lastPrice+"</br>"+priceUpdated+"</span>";
+	var popupInfo = "<span>"+nameForLink+"</br>"+item.Symbol+ " | "+worthYourWhilePosition.toFixed(2)+ " shares ($"+worthYourWhilePositionOutlay.toFixed(2)+")</br>$" +lastPrice+ "</br>"+change+" ("+ pctChange +")</br>"+priceUpdated+"</span>";
 	
 	
 	var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + popupInfo +"</a>" + "</td>";
