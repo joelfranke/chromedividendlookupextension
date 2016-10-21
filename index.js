@@ -164,8 +164,8 @@ var symbolForLink = JSON.stringify(item.Symbol);
 	var pctChg50 = JSON.stringify(item.PercentChangeFromFiftydayMovingAverage);
 	var priceUpdated = JSON.stringify(item.LastTradeDate + " - " +item.LastTradeTime);	
 	
-	//build this out with html/css to show data in popup
-	var popupInfo = "<span>"+nameForLink+"</br>"+symbolForLink+"</br>"+lastPrice+"</span>";
+	//build this out with html/css to show extra data (including worth your while position) in popup
+	var popupInfo = "<span>"+nameForLink+"</br>"+symbolForLink+"</br>"+lastPrice+"</br>"+priceUpdated+"</span>";
 	
 	
 	var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + popupInfo +"</a>" + "</td>";
