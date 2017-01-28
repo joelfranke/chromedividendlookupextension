@@ -17,15 +17,15 @@ The options page currently only includes a watchlist field. This field captures 
 Disclaimer.
 
 # To be done
-- RegEx: DOI RegEx harvester updated to 1) evaluate and write symbols from all links into the relevant variable and 2) evaluate all TEXT variables from the press release format into relevant variable.
+- RegEx: DOI RegEx harvester updated to ```1) evaluate and write symbols from all links into the relevant variable``` and 2) evaluate all TEXT variables from the press release format into relevant variable.
   - ```// \"\)\s\(([A-Z]{1,4})\)``` ("Wendy's" or the "Company") (WEN).
 - ~~JS: Create link function to be consolidated based on any and all actions, not seperate functions for each type of action.~~
 - ~~JS: Address null pageItems, fails when trying to resolve data.query.results.quote.~~
 - JS: Modify API to use ~~intr inio~~
-- JS: Add alert on watchlist symbols (via alert or extension logo change)
+- ```JS: Add alert on watchlist symbols (via alert or extension logo change)```
 - JS: Add look-ahead symbol suggestion for search box
-- Options: Modify options page to 1) optionally add/change any four variables ~~and 2) accomodate an API token~~
-- Options: Create custom variable expression builder for calculated fields
+- ```Options: Modify options page to 1) optionally add/change any four variables ~~and 2) accomodate an API token~~```
+- ```Options: Create custom variable expression builder for calculated fields```
 - ~~Options: Scrub non-alphabetical characters and all symbols, except comma, from watchlist field.~~
 - Popup: Remove Yahoo! references
 - ~~Popup: Drop hover-over CSS~~
