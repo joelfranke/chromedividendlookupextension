@@ -1,14 +1,14 @@
 // Saves options to chrome.storage.sync.
 function save_options() {
  
- //var attributes = document.getElementById('attributes').value;
+  var token = document.getElementById('token').value;
   var portfolio = document.getElementById('portfolio').value;
   
   //scrub the portfolio variable of all numbers and punctuation, except comma (,)
   portfolio = portfolio.replace(/[^A-Za-z,]/g,'');
-  console.log(portfolio)
   chrome.storage.sync.set({
-	portfolio: portfolio
+	portfolio: portfolio,
+	token: token
   }, function() {
     
 	// Update status to let user know options were saved.
@@ -23,11 +23,15 @@ function save_options() {
 // stored in chrome.storage.
 function restored_options() {
   chrome.storage.sync.get({
-	portfolio: null
+	portfolio: null,
+	token: null
   }, function(items) {
 	document.getElementById('portfolio').value = items.portfolio;
+	document.getElementById('token').value = items.token;
   });
 }
 document.addEventListener('DOMContentLoaded', restored_options);
 document.getElementById('save').addEventListener('click',
+    save_options);
+document.getElementById('apiToken').addEventListener('click',
     save_options);

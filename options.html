@@ -6,20 +6,46 @@
 
 <body>
 <div>
-<!--Selected Attributes:
-  <select id="attributes">
-   <option value="attribute1">attribute1</option>
-   <option value="attribute2">attribute2</option>
-   <option value="attribute3">attribute3</option>
-  </select>-->
 <div id="portfolio-div">
 <h2>
 Watchlist
 </h2>
-  <input type="text" id="portfolio" class="searchbox" placeholder="IBM,AAPL"/>
+<input type="text" id="portfolio" class="searchbox" placeholder="IBM,AAPL"/><button id="save">Update</button>
 </div>
-  <div id="status"></div>
-  <button id="save">Save</button>
+<div id="attributes-div">
+<h2>
+Screener Attributes
+</h2>
+Column 1
+  <select id="attribute1">
+   <option value="selection1">selection1</option>
+   <option value="selection2">selection2</option>
+   <option value="selection3">selection3</option>
+  </select>
+</br>
+Column 2
+  <select id="attribute2">
+   <option value="selection1">selection1</option>
+   <option value="selection2">selection2</option>
+   <option value="selection3">selection3</option>
+  </select>
+</br>
+Column 3
+  <select id="attribute3">
+   <option value="selection1">selection1</option>
+   <option value="selection2">selection2</option>
+   <option value="selection3">selection3</option>
+  </select>
+</div>
+<div>
+<h2>
+API Token
+</h2>
+<input type="text" id="token" class="searchbox" placeholder="NNXH123JDHFH123776"/><button id="apiToken">Update</button>
+</div>
+
+<div id="status"></div>
+
   
   <div class="footer">
   © 2017 -
