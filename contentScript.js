@@ -1,24 +1,33 @@
-//Capture the body of the page as text
-var pageContent = $('body').text();
+//Capture the links of the page as array, note: does not work on pages with content in frames
+var array = [];
+var links = document.getElementsByTagName("a");
 
-// RegEx to evaluate body against, needs work
-var regEx = /.+[\\\/|\/|=]\b([A-Z]{1,4})\b[^\-\>\/\<\ \=]|\"\)\s\(([A-Z]{1,4})\)|[^>]\b([A-Z]{1,4})[\=|\:|\. ]{1,2}[A-Z]{1,6}[^\.\,\;\-\>\< ]\b/g;
+// testing variable/alert only
+var string = [].map.call( links, function(node){
+        return node.childNodes || node.localName || "";
+    }).join("");
 
-//Evaluate body
-var pageSymbols = regEx.exec(pageContent);
-
-//Create array to hold matches
-var output = [];
-
-//Iterate over matches and write to output
-while (pageSymbols != null) {
-    // matched text: pageSymbols[0]
-    // match start: pageSymbols.index
-    // capturing group n: pageSymbols[n]
-    output.push(pageSymbols[1]);
-	pageSymbols = regEx.exec(pageContent);
-	
+for(var i=0; i<links.length; i++) {
+    array.push(links[i].href);
 }
+   var pageLinks = array; 
+   var regExLinks = /.+[\\\/|\/|=]\b([A-Z]{1,4})\b[^\-\>\/\<\ \=]/g;
+   //Create array to hold matches
+   var output = [];
+   //Evaluate links
+var pageSymbolLinks = regExLinks.exec(pageLinks);
+
+//Iterate over links matches and write to output
+while (pageSymbolLinks !== null) {
+    // matched text: pageSymbolLinks[0]
+    // match start: pageSymbolLinks.index
+    // capturing group n: pageSymbolLinks[n]
+    output.push(pageSymbolLinks[1]);
+	pageSymbolLinks = regExLinks.exec(pageLinks);
+}
+
+// RegEx to evaluate body text against
+// var regEx = /\"\)\s\(([A-Z]{1,4})\)|[^>]\b([A-Z]{1,4})[\=|\:|\. ]{1,2}[A-Z]{1,6}[^\.\,\;\-\>\< ]\b/g;
 
 //Array to evaluate duplicate values
 var tableCollectedSymbolsArray = [];
