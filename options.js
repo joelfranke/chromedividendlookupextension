@@ -1,11 +1,8 @@
 // Saves options to chrome.storage.sync.
 function save_options() {
- //var color = document.getElementById('color').value;
- //var likesColor = document.getElementById('like').checked;
+ //var attributes = document.getElementById('attributes').value;
   var portfolio = document.getElementById('portfolio').value;
   chrome.storage.sync.set({
-   //favoriteColor: color,
-    //likesColor: likesColor,
 	portfolio: portfolio
   }, function() {
     // Update status to let user know options were saved.
@@ -16,18 +13,11 @@ function save_options() {
     }, 1000);
   });
 }
-
-// Restores select box and checkbox state using the preferences
 // stored in chrome.storage.
 function restore_options() {
-  // Use default value color = 'red' and likesColor = true.
   chrome.storage.sync.get({
-    //favoriteColor: 'red',
-    //likesColor: true,
 	portfolio: null
   }, function(items) {
-    //document.getElementById('color').value = items.favoriteColor;
-    //document.getElementById('like').checked = items.likesColor;
 	document.getElementById('portfolio').value = items.portfolio;
   });
 }
