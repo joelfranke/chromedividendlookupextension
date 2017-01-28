@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Stock Screener for Chrome",
-  "description": "This extension uses API to provide information related to stocks.",
+  "description": "This extension uses an API to provide information related to stocks.",
   "version": "0.1",
    "content_scripts": [
     {
