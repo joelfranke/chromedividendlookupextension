@@ -9,7 +9,7 @@ chrome.storage.sync.get('onpagesymbols', function(contentdata) {
     pageItems = JSON.stringify(contentdata.onpagesymbols).toUpperCase();
 	console.log(pageItems);
     });
-	
+
 var apiUrl;
 var tableCreated;
 var tableSymbolsArray = [];
@@ -80,20 +80,12 @@ jQuery.getJSON(apiUrl, function(data) {
 	var pctChg50 = JSON.stringify(item.PercentChangeFromFiftydayMovingAverage);
 	var priceUpdated = JSON.stringify(item.LastTradeDate + " - " + item.LastTradeTime);	
 	console.log(priceUpdated);
-		
-
-      //logic for date check to highlight cells using greencell id via css
-      if (date >= today) {
-        var divDateRow = "<td id='greencell'>"  + item.ExDividendDate + "</td>";
-      } else {
-        var divDateRow = "<td>" + item.ExDividendDate + "</td>";
-      }
 
       // Append rows/columns to table #symbols
       $("#symbols").append($('<tr/>')
         .append($('<td/>').text(item.Symbol))
         .append($(stockQuoteLink))
-        .append($(divDateRow))
+        .append($('<td/>').text(item.ExDividendDate))
         .append($('<td/>').text(item.DividendPayDate))
         .append($('<td/>').text(quarterlyDividend))
 
@@ -105,8 +97,6 @@ jQuery.getJSON(apiUrl, function(data) {
 });
 }
 function getDataSaved() {
-
-
 // Make API request:
 apiUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(" + storedPortfolio + ")&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
 
@@ -178,19 +168,13 @@ var symbolForLink = JSON.stringify(item.Symbol);
 	
 	var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + popupInfo +"</a>" + "</td>";
 	console.log(priceUpdated);
-      //logic for date check to highlight cells using greencell id via css
-      if (date >= today) {
-        var divDateRow = "<td id='greencell'>"  + item.ExDividendDate + "</td>";
-      } else {
-        var divDateRow = "<td>" + item.ExDividendDate + "</td>";
-      }
+
 	 var changeDetails = "<td>" + change + " ("+ pctChange +")" + "</td>";
 
       // Append rows/columns to table #symbols
       $("#symbols").append($('<tr/>')
         .append($('<td/>').text(item.Symbol))
         .append($(stockQuoteLink))
-        //.append($(divDateRow))
         .append($(changeDetails))
 		.append($('<td/>').text(item.DividendPayDate))
         .append($('<td/>').text(quarterlyDividend))
@@ -200,7 +184,6 @@ var symbolForLink = JSON.stringify(item.Symbol);
     })
 });
 }
-
 function getDataForPage() {
 
 
@@ -265,18 +248,13 @@ var symbolForLink = JSON.stringify(item.Symbol);
 	var pctChg50 = JSON.stringify(item.PercentChangeFromFiftydayMovingAverage);
 	var priceUpdated = JSON.stringify(item.LastTradeDate + " - " +item.LastTradeTime);	
 	console.log(priceUpdated);
-      //logic for date check to highlight cells using greencell id via css
-      if (date >= today) {
-        var divDateRow = "<td id='greencell'>"  + item.ExDividendDate + "</td>";
-      } else {
-        var divDateRow = "<td>" + item.ExDividendDate + "</td>";
-      }
+
 
       // Append rows/columns to table #symbols
       $("#symbols").append($('<tr/>')
         .append($('<td/>').text(item.Symbol))
         .append($(stockQuoteLink))
-        .append($(divDateRow))
+        .append($('<td/>').text(item.ExDividendDate))
         .append($('<td/>').text(item.DividendPayDate))
         .append($('<td/>').text(quarterlyDividend))
 
