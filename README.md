@@ -18,6 +18,7 @@ Disclaimer.
 
 # To be done
 - RegEx: DOI RegEx harvester updated to 1) evaluate and write symbols from all links into the relevant variable and 2) evaluate all TEXT variables from the press release format into relevant variable.
+  - ```// \"\)\s\(([A-Z]{1,4})\)``` ("Wendy's" or the "Company") (WEN).
 - ~~JS: Create link function to be consolidated based on any and all actions, not seperate functions for each type of action.~~
 - JS: Address null pageItems, fails when trying to resolve data.query.results.quote.
 - JS: Modify API to use ~~intr inio~~
