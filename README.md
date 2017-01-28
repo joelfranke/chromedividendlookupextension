@@ -18,7 +18,8 @@ Disclaimer.
 
 # To be done
 - RegEx: DOI RegEx harvester updated to 1) evaluate and write symbols from all links into the relevant variable and 2) evaluate all TEXT variables from the press release format into relevant variable.
-- JS: Create link function to be consolidated based on any and all actions, not seperate functions for each type of action.
+- ~~JS: Create link function to be consolidated based on any and all actions, not seperate functions for each type of action.~~
+- JS: Address null pageItems, fails when trying to resolve data.query.results.quote.
 - JS: Modify API to use https://intrinio.com/marketplace/apps
 - Options: Modify options page to 1) optionally add/change any four variables and 2) accomodate an API token
 - Options: Create custom variable expression builder for calculated fields
