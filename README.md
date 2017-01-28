@@ -26,3 +26,4 @@ Disclaimer field.
 - JS: Add alert on watchlist symbols (via alert or extension logo change)
 - JS: Add look-ahead symbol suggestion for search box
 - Options: Scrub non-alphabetical characters and all symbols, except comma, from watchlist field.
+- Popup: Remove Yahoo! references
