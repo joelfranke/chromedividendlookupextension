@@ -22,7 +22,7 @@ Disclaimer.
 - JS: Modify API to use https://intrinio.com/marketplace/apps
 - Options: Modify options page to 1) optionally add/change any four variables and 2) accomodate an API token
 - Options: Create custom variable expression builder for calculated fields
-- Popup: Drop hover-over CSS
+~~- Popup: Drop hover-over CSS~~
 - JS: Add alert on watchlist symbols (via alert or extension logo change)
 - JS: Add look-ahead symbol suggestion for search box
 - Options: Scrub non-alphabetical characters and all symbols, except comma, from watchlist field.
