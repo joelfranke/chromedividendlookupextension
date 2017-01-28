@@ -14,7 +14,7 @@ On the options page, there is a field that captures a list of comma delimited sy
 The options page currently only includes a watchlist field. This field captures a list of comma-delimimted symbols which are searched when "Search watchlist" is clicked.
 
 ## Notice
-Disclaimer field.
+Disclaimer.
 
 # To be done
 - RegEx: DOI RegEx harvester updated to 1) evaluate and write symbols from all links into the relevant variable and 2) evaluate all TEXT variables from the press release format into relevant variable.
