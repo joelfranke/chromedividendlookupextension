@@ -56,33 +56,3 @@
 	#status {
 	padding-top: 2px;
 	}
-	
-/*HOVER POPUP LINKS*/
-
-/*hoverpopups type 1*/
-
-
-#popup a span {
-	display: none;
-}
-
-#popup a:hover { 
-	text-decoration: underline;
-}
-
-#popup a:hover span {
-	display: block;
-	position: absolute;
-	top: 40px;
-	left: 200px;
-	width: 200px;
-	margin: 0px;
-	padding: 10px;
-	color: #335500;
-	font-weight: normal;
-	background: #e5e5e5;
-	text-align: left;
-	border: 1px solid #666;
-}
-
-/*end of hover popup links*/
