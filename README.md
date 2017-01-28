@@ -21,10 +21,10 @@ Disclaimer.
 - ~~JS: Create link function to be consolidated based on any and all actions, not seperate functions for each type of action.~~
 - JS: Address null pageItems, fails when trying to resolve data.query.results.quote.
 - JS: Modify API to use https://intrinio.com/marketplace/apps
-- Options: Modify options page to 1) optionally add/change any four variables and 2) accomodate an API token
-- Options: Create custom variable expression builder for calculated fields
-- ~~Popup: Drop hover-over CSS~~
 - JS: Add alert on watchlist symbols (via alert or extension logo change)
 - JS: Add look-ahead symbol suggestion for search box
+- Options: Modify options page to 1) optionally add/change any four variables and 2) accomodate an API token
+- Options: Create custom variable expression builder for calculated fields
 - Options: Scrub non-alphabetical characters and all symbols, except comma, from watchlist field.
 - Popup: Remove Yahoo! references
+- ~~Popup: Drop hover-over CSS~~
