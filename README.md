@@ -1,5 +1,5 @@
 # Chrome Extension - Stock Screener
-This extension uses API to provide information related to stocks.
+This extension uses an API to provide information related to stocks.
 
 ## Search
 In a search box, any number of symbols can be entered into a search box. These symbols are then passed to a web service which returns a result or a null result. Those results are written as rows into a table with the appropriate variables displayed in the columns of that table.
