@@ -23,7 +23,7 @@ Disclaimer.
 - JS: Modify API to use https://intrinio.com/marketplace/apps
 - JS: Add alert on watchlist symbols (via alert or extension logo change)
 - JS: Add look-ahead symbol suggestion for search box
-- Options: Modify options page to 1) optionally add/change any four variables and 2) accomodate an API token
+- Options: Modify options page to 1) optionally add/change any four variables ~~and 2) accomodate an API token~~
 - Options: Create custom variable expression builder for calculated fields
 - ~~Options: Scrub non-alphabetical characters and all symbols, except comma, from watchlist field.~~
 - Popup: Remove Yahoo! references
