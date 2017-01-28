@@ -9,16 +9,19 @@ chrome.storage.sync.get('onpagesymbols', function(contentdata) {
     pageItems = JSON.stringify(contentdata.onpagesymbols).toUpperCase();
 	console.log(pageItems);
     });
-
-
+	
+var apiUrl;
 var tableCreated;
 var tableSymbolsArray = [];
 
+
+
 function getData() {
 
-var collectedSymbols = $("#symbol").val().toUpperCase();
 // Make API request:
-var apiUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22" + collectedSymbols + "%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+var collectedSymbols = $("#symbol").val().toUpperCase();
+
+apiUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(%22" + collectedSymbols + "%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
 
 // Set date variables
 var dateObj = new Date();
@@ -105,13 +108,13 @@ function getDataSaved() {
 
 
 // Make API request:
-var apiUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(" + storedPortfolio + ")&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+apiUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(" + storedPortfolio + ")&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
 
 // Set date variables
 var dateObj = new Date();
 today = Date.parse(dateObj);
 
-var tableStructure ="<thead><th>Stock Symbol</th><th>Company Name</th><th>Ex-dividend Date</th><th>Dividend Pay Date</th><th>Dividend</th></thead><tbody></tbody>"
+var tableStructure ="<thead><th>Stock Symbol</th><th>Company Name</th><th>Daily Performance</th><th>Dividend Pay Date</th><th>Dividend</th></thead><tbody></tbody>"
 
 // Post request
 jQuery.getJSON(apiUrl, function(data) {
@@ -154,9 +157,9 @@ var symbolForLink = JSON.stringify(item.Symbol);
   }
      
 
-      var quarterlyDividend = "$" + item.DividendShare / 4;
+    var quarterlyDividend = "$" + item.DividendShare / 4;
 
-      var date = Date.parse(item.ExDividendDate);
+    var date = Date.parse(item.ExDividendDate);
 	var lastPrice = item.LastTradePriceOnly;
 	var change = item.Change;
 	var pctChange = item.ChangeinPercent;
@@ -165,11 +168,12 @@ var symbolForLink = JSON.stringify(item.Symbol);
 	var chg50 = item.ChangeFromFiftydayMovingAverage;
 	var pctChg50 = item.PercentChangeFromFiftydayMovingAverage;
 	var priceUpdated = item.LastTradeDate + " - " +item.LastTradeTime;	
+	//need to handle null condition for this calculation
 	var worthYourWhilePosition = lastPrice/(item.DividendShare / 4);
 	var worthYourWhilePositionOutlay = worthYourWhilePosition * lastPrice;
 	
 	//build this out with html/css to show extra data (including worth your while position) in popup
-	var popupInfo = "<span>"+nameForLink+"</br>"+item.Symbol+ " | "+worthYourWhilePosition.toFixed(2)+ " shares ($"+worthYourWhilePositionOutlay.toFixed(2)+")</br>$" +lastPrice+ "</br>"+change+" ("+ pctChange +")</br>"+priceUpdated+"</span>";
+	var popupInfo = "<span>"+nameForLink+"</br>"+item.Symbol+ " | "+worthYourWhilePosition.toLocaleString('en', {maximumSignificantDigits : 5})+ " shares ($"+worthYourWhilePositionOutlay.toLocaleString('en', {maximumSignificantDigits : 5})+")</br>$" +lastPrice+ "</br>"+change+" ("+ pctChange +")</br>"+priceUpdated+"</span>";
 	
 	
 	var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + popupInfo +"</a>" + "</td>";
@@ -180,13 +184,15 @@ var symbolForLink = JSON.stringify(item.Symbol);
       } else {
         var divDateRow = "<td>" + item.ExDividendDate + "</td>";
       }
+	 var changeDetails = "<td>" + change + " ("+ pctChange +")" + "</td>";
 
       // Append rows/columns to table #symbols
       $("#symbols").append($('<tr/>')
         .append($('<td/>').text(item.Symbol))
         .append($(stockQuoteLink))
-        .append($(divDateRow))
-        .append($('<td/>').text(item.DividendPayDate))
+        //.append($(divDateRow))
+        .append($(changeDetails))
+		.append($('<td/>').text(item.DividendPayDate))
         .append($('<td/>').text(quarterlyDividend))
 
       );
@@ -194,11 +200,12 @@ var symbolForLink = JSON.stringify(item.Symbol);
     })
 });
 }
+
 function getDataForPage() {
 
 
 // Make API request:
-var apiUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(" + pageItems + ")&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+apiUrl = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.quotes%20where%20symbol%20in%20(" + pageItems + ")&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
 
 // Set date variables
 var dateObj = new Date();
@@ -227,7 +234,7 @@ jQuery.getJSON(apiUrl, function(data) {
 var symbolForLink = JSON.stringify(item.Symbol);
       // Check for valid symbols and set checkItems, otherwise break loop
 	if (nameForLink == null) {
-        alert(symbolForLink + ' returns no result. Please update your saved portfolio to stop seeing this message.');
+        alert('No results on this page.');
 		return true;
       } else {
         checkItems = 1;
@@ -313,4 +320,5 @@ document.getElementById("symbol")
         document.getElementById("form-input-submit").click();
     }
 });
+
 
