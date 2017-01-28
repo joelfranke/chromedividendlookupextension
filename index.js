@@ -46,10 +46,9 @@ var tableStructure ="<thead><th>Stock Symbol</th><th>Company Name</th><th>Daily 
 
 // Currently not handling null pageItems, fails when trying to resolve data.query.results.quote.
 if (selectionType == "page"){
-	if (pageItems.length == '""'){
+	if (pageItems == '""'){
 		alert('No symbols found on this page.');
 	} else {
-		console.log('A symbol is found on this page.')
 
 // Post request
 jQuery.getJSON(apiUrl, function(data) {
