@@ -45,6 +45,11 @@ if (selectionType == "watchlist"){
 var tableStructure ="<thead><th>Stock Symbol</th><th>Company Name</th><th>Daily Performance</th><th>Dividend Pay Date</th><th>Dividend</th></thead><tbody></tbody>"
 
 // Currently not handling null pageItems, fails when trying to resolve data.query.results.quote.
+if (selectionType == "page"){
+	if (pageItems.length == '""'){
+		alert('No symbols found on this page.');
+	} else {
+		console.log('A symbol is found on this page.')
 
 // Post request
 jQuery.getJSON(apiUrl, function(data) {
@@ -111,6 +116,11 @@ jQuery.getJSON(apiUrl, function(data) {
 }
 
 );
+
+//end of if nesting
+}
+};
+
 }
 
 function clickHandler(e) {
