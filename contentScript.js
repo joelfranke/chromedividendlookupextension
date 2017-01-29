@@ -12,14 +12,17 @@ for(var i=0; i<links.length; i++) {
 }
    var pageLinks = array; 
    var regExLinks = /.+[\\\/|\/|=]\b([A-Z]{1,4})\b[^\-\>\/\<\ \=]/g;
-   //Create array to hold matches
-   var output = [];
-   //Evaluate links
+   
+//Create array to hold matches
+var output = [];
+  
+  //Evaluate links
 var pageSymbolLinks = regExLinks.exec(pageLinks);
 
 //Iterate over links matches and write to output
 while (pageSymbolLinks !== null) {
-    // matched text: pageSymbolLinks[0]
+    
+	// matched text: pageSymbolLinks[0]
     // match start: pageSymbolLinks.index
     // capturing group n: pageSymbolLinks[n]
     output.push(pageSymbolLinks[1]);

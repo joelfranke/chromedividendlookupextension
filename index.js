@@ -11,13 +11,45 @@ var pageItems;
 chrome.storage.sync.get('onpagesymbols', function(contentdata) {
     pageItems = JSON.stringify(contentdata.onpagesymbols).toUpperCase();
 	console.log(pageItems);
-    }
+	var watchlistCheck = [];
+	var storedArray = [];
+	var badgeCount = [];
+
+	if (pageItems =='""'){
+		console.log('No page items to check against watchlist.');
+		} else if (storedPortfolio == '""') {
+		console.log('No watchlist saved.');
+		} else {
+			watchlistCheck = pageItems.replace(/['"]+/g, '').split(",");
+			storedArray = storedPortfolio.replace(/['"]+/g, '').split(",");
+			console.log(storedArray);
+				//Compare found items on page vs. watchlist
+				$.each(watchlistCheck, function(index, founditems) {
+
+					var foundItem = founditems;
+					if (storedArray.indexOf(foundItem) >= 0){
+					console.log('Item found.');
+					badgeCount.push(foundItem);
+					badgeCountLength = badgeCount.length.toString()
+					//write number of items found into badgetext
+					chrome.browserAction.setBadgeBackgroundColor({ color: [11, 61, 0, 142] });
+					chrome.browserAction.setBadgeText({text: badgeCountLength});
+					} else{
+					console.log('Do nothing');
+					}
+
+				}
+				)
+		}
+	
+	}
 );
+
 
 // This variable from chrome storage is to be used in the API request
 var apiToken;
 chrome.storage.sync.get('token', function(localdata) {
-    apiToken = JSON.stringify(localdata.token).toUpperCase();
+    apiToken = JSON.stringify(localdata.token);
 	console.log(apiToken);
     }
 );
@@ -51,6 +83,7 @@ var tableCreated;
 var tableSymbolsArray = [];
 var selectionType;
 var nullMessage;
+
 
 function getData() {
 
