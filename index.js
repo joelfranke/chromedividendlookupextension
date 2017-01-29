@@ -1,10 +1,12 @@
+// This variable from chrome storage represents the stored watchlist
 var storedPortfolio;
 chrome.storage.sync.get('portfolio', function(localdata) {
     storedPortfolio = JSON.stringify(localdata.portfolio).toUpperCase();
 	console.log(storedPortfolio);
     }
 );
-	
+
+// This variable from chrome storage represents the symbols found on the page
 var pageItems;
 chrome.storage.sync.get('onpagesymbols', function(contentdata) {
     pageItems = JSON.stringify(contentdata.onpagesymbols).toUpperCase();
@@ -12,11 +14,35 @@ chrome.storage.sync.get('onpagesymbols', function(contentdata) {
     }
 );
 
-// This variable is to be used in the API request
+// This variable from chrome storage is to be used in the API request
 var apiToken;
 chrome.storage.sync.get('token', function(localdata) {
     apiToken = JSON.stringify(localdata.token).toUpperCase();
 	console.log(apiToken);
+    }
+);
+
+// This variable from chrome storage will be written into the first column of the table
+var attribute1;
+chrome.storage.sync.get('attribute1', function(localdata) {
+    attribute1 = JSON.stringify(localdata.attribute1);
+	console.log(attribute1);
+    }
+);
+
+// This variable from chrome storage will be written into the second column of the table
+var attribute2;
+chrome.storage.sync.get('attribute2', function(localdata) {
+    attribute2 = JSON.stringify(localdata.attribute2);
+	console.log(attribute2);
+    }
+);
+
+// This variable from chrome storage will be written into the third column of the table
+var attribute3;
+chrome.storage.sync.get('attribute3', function(localdata) {
+    attribute3 = JSON.stringify(localdata.attribute3);
+	console.log(attribute3);
     }
 );
 
