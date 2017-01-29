@@ -70,7 +70,6 @@ if (selectionType == "watchlist"){
 // Build HTML table
 var tableStructure ="<thead><th>Stock Symbol</th><th>Company Name</th><th>Daily Performance</th><th>Dividend Pay Date</th><th>Dividend</th></thead><tbody></tbody>"
 
-// Currently not handling null pageItems, fails when trying to resolve data.query.results.quote.
 if (selectionType == "page" && pageItems =='""'){
 		alert('No symbols found on this page.');
 	} else {
@@ -95,10 +94,13 @@ jQuery.getJSON(apiUrl, function(data) {
     
 	// Check for valid symbols and set checkItems, otherwise break loop
 	if (nameForLink == null) {
-        
-		// Messaging for page look-up doesn't make sense here.
-		alert(symbolForLink + nullMessage);
-		return true;
+        if (selectionType == "page") {
+			alert('No symbols found on this page.');
+			return true;
+		}
+			else {
+			alert(symbolForLink + nullMessage);
+			return true;}
       } else {
         checkItems = 1;
       }
