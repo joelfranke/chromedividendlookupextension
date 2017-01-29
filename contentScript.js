@@ -1,23 +1,24 @@
 //Capture the links of the page as array, note: does not work on pages with content in frames
-var array = [];
-var links = document.getElementsByTagName("a");
-
-// testing variable/alert only
-var string = [].map.call( links, function(node){
-        return node.childNodes || node.localName || "";
-    }).join("");
-
-for(var i=0; i<links.length; i++) {
-    array.push(links[i].href);
-}
-   var pageLinks = array; 
-   var regExLinks = /.+[\\\/|\/|=]\b([A-Z]{1,4})\b[^\-\>\/\<\ \=]/g;
+var linksArray = [].slice.call(document.querySelectorAll("a"));
+var links = linksArray.map(function(elem) {return elem.getAttribute('href');});
+var regExLinks = /.+[\\\/|\/|=]\b([A-Z]{1,4})\b[^\-\>\/\<\ \=]/g;
    
 //Create array to hold matches
 var output = [];
   
-  //Evaluate links
-var pageSymbolLinks = regExLinks.exec(pageLinks);
+//Evaluate links
+var pageSymbolLinks = regExLinks.exec(links);
+
+// test start
+// var linkString = links.toString();
+// console.log(linkString);
+// var myArray;
+// while ((myArray = regExLinks.exec(linkString)) !== null) {
+//	var msg = 'Found ' + myArray[0] + '. ';
+//  msg += 'Next match starts at ' + regExLinks.lastIndex;
+//  console.log(linkString);}
+// test end
+
 
 //Iterate over links matches and write to output
 while (pageSymbolLinks !== null) {
@@ -25,11 +26,11 @@ while (pageSymbolLinks !== null) {
 	// matched text: pageSymbolLinks[0]
     // match start: pageSymbolLinks.index
     // capturing group n: pageSymbolLinks[n]
-    output.push(pageSymbolLinks[1]);
-	pageSymbolLinks = regExLinks.exec(pageLinks);
+	 output.push(pageSymbolLinks[1]);
+	pageSymbolLinks = regExLinks.exec(links);
 }
 
-// RegEx to evaluate body text against
+// RegEx against which to evaluate body text
 // var regEx = /\"\)\s\(([A-Z]{1,4})\)|[^>]\b([A-Z]{1,4})[\=|\:|\. ]{1,2}[A-Z]{1,6}[^\.\,\;\-\>\< ]\b/g;
 
 //Array to evaluate duplicate values
