@@ -10,6 +10,7 @@ var output = [];
 var pageSymbolLinks = regExLinks.exec(links);
 
 // test start
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
 // var linkString = links.toString();
 // console.log(linkString);
 // var myArray;
