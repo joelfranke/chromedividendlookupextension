@@ -22,7 +22,7 @@ Disclaimer.
 - ~~JS: Create link function to be consolidated based on any and all actions, not seperate functions for each type of action.~~
 - ~~JS: Address null pageItems, fails when trying to resolve data.query.results.quote.~~
 - JS: Modify API to use ~~intr inio~~
-- ```JS: Add alert on watchlist symbols (via alert or extension logo change)```
+- ~~JS: Add alert on watchlist symbols (via alert or extension logo change)~~ ```on page load.```
 - JS: Add look-ahead symbol suggestion for search box
 - ~~JS: Modify messaging for page result lookup with no results (not null).~~~
 - ~~Options: Modify options page to 1) optionally add/change any three variables and 2) accomodate an API token~~
