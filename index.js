@@ -1,8 +1,11 @@
-// This variable from chrome storage represents the stored watchlist
+
+// write the scraped page symbols string to storage.sync
+
+    //chrome.browserAction.setBadgeText({"text":"ABCD","tabId":tabId});
+	// This variable from chrome storage represents the stored watchlist
 var storedPortfolio;
 chrome.storage.sync.get('portfolio', function(localdata) {
     storedPortfolio = JSON.stringify(localdata.portfolio).toUpperCase();
-	console.log(storedPortfolio);
     }
 );
 
@@ -10,7 +13,6 @@ chrome.storage.sync.get('portfolio', function(localdata) {
 var pageItems;
 chrome.storage.sync.get('onpagesymbols', function(contentdata) {
     pageItems = JSON.stringify(contentdata.onpagesymbols).toUpperCase();
-	console.log(pageItems);
 	var watchlistCheck = [];
 	var storedArray = [];
 	var badgeCount = [];
@@ -22,20 +24,20 @@ chrome.storage.sync.get('onpagesymbols', function(contentdata) {
 		} else {
 			watchlistCheck = pageItems.replace(/['"]+/g, '').split(",");
 			storedArray = storedPortfolio.replace(/['"]+/g, '').split(",");
-			console.log(storedArray);
 				//Compare found items on page vs. watchlist
 				$.each(watchlistCheck, function(index, founditems) {
 
 					var foundItem = founditems;
 					if (storedArray.indexOf(foundItem) >= 0){
-					console.log('Item found.');
+					console.log('Watchlist item(s) found on the current tab.');
 					badgeCount.push(foundItem);
 					badgeCountLength = badgeCount.length.toString()
-					//write number of items found into badgetext
+					//write number of items found into badgetext in real time for all tabs
+					//http://stackoverflow.com/questions/32168449/how-can-i-get-different-badge-value-for-every-tab-on-chrome
 					chrome.browserAction.setBadgeBackgroundColor({ color: [11, 61, 0, 142] });
 					chrome.browserAction.setBadgeText({text: badgeCountLength});
 					} else{
-					console.log('Do nothing');
+					console.log('No matches found against watchlist.');
 					}
 
 				}
@@ -46,11 +48,11 @@ chrome.storage.sync.get('onpagesymbols', function(contentdata) {
 );
 
 
+
 // This variable from chrome storage is to be used in the API request
 var apiToken;
 chrome.storage.sync.get('token', function(localdata) {
     apiToken = JSON.stringify(localdata.token);
-	console.log(apiToken);
     }
 );
 
@@ -58,7 +60,6 @@ chrome.storage.sync.get('token', function(localdata) {
 var attribute1;
 chrome.storage.sync.get('attribute1', function(localdata) {
     attribute1 = JSON.stringify(localdata.attribute1);
-	console.log(attribute1);
     }
 );
 
@@ -66,7 +67,6 @@ chrome.storage.sync.get('attribute1', function(localdata) {
 var attribute2;
 chrome.storage.sync.get('attribute2', function(localdata) {
     attribute2 = JSON.stringify(localdata.attribute2);
-	console.log(attribute2);
     }
 );
 
@@ -74,7 +74,6 @@ chrome.storage.sync.get('attribute2', function(localdata) {
 var attribute3;
 chrome.storage.sync.get('attribute3', function(localdata) {
     attribute3 = JSON.stringify(localdata.attribute3);
-	console.log(attribute3);
     }
 );
 
