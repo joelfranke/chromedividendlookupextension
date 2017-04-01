@@ -7,7 +7,7 @@
    "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["jquery.js","contentScript.js"]
+      "js": ["jquery.js"]
     }
   ],
   "options_ui": {
