@@ -1,6 +1,4 @@
-// remove all page scraping references
 // clean up code, comment
-
 
 // write the scraped page symbols string to storage.sync
 
@@ -11,6 +9,7 @@ chrome.storage.sync.get('portfolio', function(localdata) {
     }
 );
 
+// array to capture the fields selected on the Options page
 var fields = [];
 
 // This variable from chrome storage will be written into the first column of the table
@@ -75,7 +74,6 @@ if (selectionType == "watchlist"){
 	}
 	
 // Builds HTML table
-// Update with a mouseover to indicate how to update the selected fields
 var tableStructure ="<thead><th>Stock Symbol</th><th>Company Name</th><th>" + tableHeader[0] + "</th><th>" + tableHeader[1] + "</th><th>" + tableHeader[2] + "</th></thead><tbody></tbody>"
 
 if (selectionType == "page" && pageItems =='""'){
@@ -124,7 +122,7 @@ jQuery.getJSON(apiUrl, function(data) {
 		
   }
 	
-	// Define variables
+	// Parse data and create variables
     var quarterlyDividend = "<td>" + "$" + item.DividendShare / 4 + "</td>";
 	var divDate = item.DividendPayDate;
 	if (item.DividendPayDate == null) {
@@ -151,7 +149,6 @@ jQuery.getJSON(apiUrl, function(data) {
 	var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
 	var changeDetails = "<td>" + change + " ("+ pctChange +")" + "</td>";
 	
-	console.log(changeDetails);
 	// array of keys:values based on the above
 	var availFields = {'lastPrice':lastPrice,'changeDetails':changeDetails,'quarterlyDividend':quarterlyDividend,'DividendYield':DividendYield,'divDate':divDate,'chg50':chg50,'pctChg50':pctChg50,'chg200':chg200,'pctChg200':pctChg200,'EarningsShare':EarningsShare,'DaysRange':DaysRange,'YearRange':YearRange,'ChangeFromYearLow':ChangeFromYearLow,'PercentChangeFromYearLow':PercentChangeFromYearLow,'ChangeFromYearHigh':ChangeFromYearHigh,'PercebtChangeFromYearHigh':PercebtChangeFromYearHigh,'MarketCapitalization':MarketCapitalization};
 
@@ -214,5 +211,3 @@ document.getElementById("symbol")
         document.getElementById("form-input-submit").click();
     }
 });
-
-
