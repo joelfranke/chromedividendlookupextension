@@ -20,3 +20,4 @@ Disclaimer and notice of terms of use.
 - ```Options: Create custom variable expression builder for calculated fields```
 - ~~Options: Scrub non-alphabetical characters and all symbols, except comma, from watchlist field.~~
 - ```Options: Modify attribute selection list to 1) dynamically reflect selectable items based on the items which have already been selected``` ~~and 2) to align with attributes available in the API.~~
+- ```Update with a mouseover to indicate how to update the selected fields```
