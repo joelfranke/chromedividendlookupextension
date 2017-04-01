@@ -2,8 +2,8 @@
   "manifest_version": 2,
 
   "name": "Stock Screener for Chrome",
-  "description": "This extension uses an API to provide information related to stocks.",
-  "version": "0.2",
+  "description": "Provides a customizable snapshot of market data for an indivdual position or a saved watchlist/portfolio.",
+  "version": "1.0",
    "content_scripts": [
     {
       "matches": ["<all_urls>"],
