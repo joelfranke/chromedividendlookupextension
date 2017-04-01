@@ -8,7 +8,7 @@ In a search box, any number of symbols can be entered into a search box. These s
 On the options page, there is a field that captures a list of comma delimited symbols that are stored as a watchlist. This field in its entirety is passed to a web service which returns a result or a null result. Those results are written as rows into a table with the appropriate variables displayed in the columns of that table.
 
 ## Options
-The options page currently only includes a watchlist field. This field captures a list of comma-delimimted symbols which are searched when "Search watchlist" is clicked.
+The options page currently only includes a watchlist field. This field captures a list of comma-delimimted symbols which are searched when "Search Watchlist" is clicked.
 
 ## Notice
 Disclaimer and notice of terms of use.
