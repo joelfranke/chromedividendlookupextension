@@ -1,65 +1,23 @@
+// remove all page scraping references
+// clean up code, comment
+
 
 // write the scraped page symbols string to storage.sync
 
-    //chrome.browserAction.setBadgeText({"text":"ABCD","tabId":tabId});
-	// This variable from chrome storage represents the stored watchlist
+// This variable from chrome storage represents the stored watchlist
 var storedPortfolio;
 chrome.storage.sync.get('portfolio', function(localdata) {
     storedPortfolio = JSON.stringify(localdata.portfolio).toUpperCase();
     }
 );
 
-// This variable from chrome storage represents the symbols found on the page
-var pageItems;
-chrome.storage.sync.get('onpagesymbols', function(contentdata) {
-    pageItems = JSON.stringify(contentdata.onpagesymbols).toUpperCase();
-	var watchlistCheck = [];
-	var storedArray = [];
-	var badgeCount = [];
-
-	if (pageItems =='""'){
-		console.log('No page items to check against watchlist.');
-		} else if (storedPortfolio == '""') {
-		console.log('No watchlist saved.');
-		} else {
-			watchlistCheck = pageItems.replace(/['"]+/g, '').split(",");
-			storedArray = storedPortfolio.replace(/['"]+/g, '').split(",");
-				//Compare found items on page vs. watchlist
-				$.each(watchlistCheck, function(index, founditems) {
-
-					var foundItem = founditems;
-					if (storedArray.indexOf(foundItem) >= 0){
-					console.log('Watchlist item(s) found on the current tab.');
-					badgeCount.push(foundItem);
-					badgeCountLength = badgeCount.length.toString()
-					//write number of items found into badgetext in real time for all tabs
-					//http://stackoverflow.com/questions/32168449/how-can-i-get-different-badge-value-for-every-tab-on-chrome
-					chrome.browserAction.setBadgeBackgroundColor({ color: [11, 61, 0, 142] });
-					chrome.browserAction.setBadgeText({text: badgeCountLength});
-					} else{
-					console.log('No matches found against watchlist.');
-					}
-
-				}
-				)
-		}
-	
-	}
-);
-
-
-
-// This variable from chrome storage is to be used in the API request
-var apiToken;
-chrome.storage.sync.get('token', function(localdata) {
-    apiToken = JSON.stringify(localdata.token);
-    }
-);
+var fields = [];
 
 // This variable from chrome storage will be written into the first column of the table
 var attribute1;
 chrome.storage.sync.get('attribute1', function(localdata) {
     attribute1 = JSON.stringify(localdata.attribute1);
+	fields.push(attribute1);
     }
 );
 
@@ -67,6 +25,7 @@ chrome.storage.sync.get('attribute1', function(localdata) {
 var attribute2;
 chrome.storage.sync.get('attribute2', function(localdata) {
     attribute2 = JSON.stringify(localdata.attribute2);
+	fields.push(attribute2);
     }
 );
 
@@ -74,6 +33,7 @@ chrome.storage.sync.get('attribute2', function(localdata) {
 var attribute3;
 chrome.storage.sync.get('attribute3', function(localdata) {
     attribute3 = JSON.stringify(localdata.attribute3);
+	fields.push(attribute3);
     }
 );
 
@@ -82,7 +42,6 @@ var tableCreated;
 var tableSymbolsArray = [];
 var selectionType;
 var nullMessage;
-
 
 function getData() {
 
@@ -99,8 +58,25 @@ if (selectionType == "watchlist"){
 	nullMessage ="No results on this page.";
 }
 
-// Build HTML table
-var tableStructure ="<thead><th>Stock Symbol</th><th>Company Name</th><th>Daily Performance</th><th>Dividend Pay Date</th><th>Dividend</th></thead><tbody></tbody>"
+	// array of keys:values based on possible selections
+	var availTableFields = {'lastPrice':'Price','changeDetails':'Daily Performance','quarterlyDividend':'Quarterly Dividend','DividendYield':'Dividend Yield','divDate':'Dividend Pay Date','chg50':'+/- 50d Average','pctChg50':'% +/- 50d Average','chg200':'+/- 200d Average','pctChg200':'% +/- 200d Average','EarningsShare':'Earnings/share','DaysRange':'Range (day)','YearRange':'Range (year)','ChangeFromYearLow':'+/- Year Low','PercentChangeFromYearLow':'% +/- Year Low','ChangeFromYearHigh':'+/- Year High','PercebtChangeFromYearHigh':'% +/- Year High','MarketCapitalization':'Market Capitalization'};
+
+	// create for loop to iterate through array of attributes from options to match against array of attributes 
+	// and write these to new array for header
+	var fieldArrayLength = fields.length;
+	var tableHeader = [];
+	
+	for (var f = 0; f < fieldArrayLength; f++) {
+		
+		for (var key in availTableFields) {
+		if (JSON.stringify(key) == fields[f]) 
+			tableHeader.push(availTableFields[key]);
+		}
+	}
+	
+// Builds HTML table
+// Update with a mouseover to indicate how to update the selected fields
+var tableStructure ="<thead><th>Stock Symbol</th><th>Company Name</th><th>" + tableHeader[0] + "</th><th>" + tableHeader[1] + "</th><th>" + tableHeader[2] + "</th></thead><tbody></tbody>"
 
 if (selectionType == "page" && pageItems =='""'){
 		alert('No symbols found on this page.');
@@ -149,26 +125,56 @@ jQuery.getJSON(apiUrl, function(data) {
   }
 	
 	// Define variables
-    var quarterlyDividend = "$" + item.DividendShare / 4;
-    var date = Date.parse(item.ExDividendDate);
-	var lastPrice = item.LastTradePriceOnly;
+    var quarterlyDividend = "<td>" + "$" + item.DividendShare / 4 + "</td>";
+	var divDate = item.DividendPayDate;
+	if (item.DividendPayDate == null) {
+		divDate	= "<td>n/a</td>";
+	} else {divDate	= "<td>" + item.DividendPayDate + "</td>";}
+	
+	var lastPrice = "<td>$" + item.LastTradePriceOnly + "</td>";
 	var change = item.Change;
+	var DividendYield = "<td>" + item.DividendYield + "%</td>";
+	var EarningsShare = "<td>" + item.EarningsShare + "</td>";
+	var DaysRange = "<td>" + item.DaysRange + "</td>";
+	var YearRange = "<td>" + item.YearRange + "</td>";
 	var pctChange = item.ChangeinPercent;
-	var chg200 = item.ChangeFromTwoHundreddayMovingAverage;
-	var pctChg200 = item.PercentChangeFromTwoHundreddayMovingAverage;
-	var chg50 = item.ChangeFromFiftydayMovingAverage;
-	var pctChg50 = item.PercentChangeFromFiftydayMovingAverage;
-	var priceUpdated = item.LastTradeDate + " - " +item.LastTradeTime;	
+	var ChangeFromYearLow = "<td>" + item.ChangeFromYearLow + "</td>";
+	var PercentChangeFromYearLow = "<td>" + item.PercentChangeFromYearLow + "</td>";
+	var ChangeFromYearHigh = "<td>" + item.ChangeFromYearHigh + "</td>";
+	var PercebtChangeFromYearHigh = "<td>" + item.PercebtChangeFromYearHigh + "</td>";
+	var MarketCapitalization = "<td>" + item.MarketCapitalization + "</td>";
+	var chg200 = "<td>" + item.ChangeFromTwoHundreddayMovingAverage + "</td>";
+	var pctChg200 = "<td>" + item.PercentChangeFromTwoHundreddayMovingAverage + "</td>";
+	var chg50 = "<td>" + item.ChangeFromFiftydayMovingAverage + "</td>";
+	var pctChg50 = "<td>" + item.PercentChangeFromFiftydayMovingAverage  + "</td>";
+	var priceUpdated = "<td>" + item.LastTradeDate + " - " +item.LastTradeTime + "</td>";
 	var stockQuoteLink = "<td>" + "<a href='http://finance.yahoo.com/q?s=" + symbolForLink.replace(/['"]+/g, '') + "' TARGET='_blank'>" + nameForLink + "</a>" + "</td>";
 	var changeDetails = "<td>" + change + " ("+ pctChange +")" + "</td>";
+	
+	console.log(changeDetails);
+	// array of keys:values based on the above
+	var availFields = {'lastPrice':lastPrice,'changeDetails':changeDetails,'quarterlyDividend':quarterlyDividend,'DividendYield':DividendYield,'divDate':divDate,'chg50':chg50,'pctChg50':pctChg50,'chg200':chg200,'pctChg200':pctChg200,'EarningsShare':EarningsShare,'DaysRange':DaysRange,'YearRange':YearRange,'ChangeFromYearLow':ChangeFromYearLow,'PercentChangeFromYearLow':PercentChangeFromYearLow,'ChangeFromYearHigh':ChangeFromYearHigh,'PercebtChangeFromYearHigh':PercebtChangeFromYearHigh,'MarketCapitalization':MarketCapitalization};
+
+	// FOR loop to iterate through array of attributes from options to match against array of attributes 
+	// and write these to new array for table
+	var fieldArrayLength = fields.length;
+	var tableVariables = [];
+	
+	for (var f = 0; f < fieldArrayLength; f++) {
+		
+		for (var key in availFields) {
+		if (JSON.stringify(key) == fields[f]) 
+			tableVariables.push(availFields[key]);
+		}
+	}
 
     // Append rows/columns to table #symbols
 	$("#symbols").append($('<tr/>')
 		.append($('<td/>').text(item.Symbol))
         .append($(stockQuoteLink))
-        .append($(changeDetails))
-		.append($('<td/>').text(item.DividendPayDate))
-        .append($('<td/>').text(quarterlyDividend))
+        .append($(tableVariables[0]))
+		.append($(tableVariables[1]))
+        .append($(tableVariables[2]))
       );
     })
 }
@@ -181,20 +187,15 @@ jQuery.getJSON(apiUrl, function(data) {
 
 function clickHandler(e) {
 	selectionType = "box";
-  setTimeout(getData, 1000);
-  
+  setTimeout(getData, 1000); 
 }
 function clickHandlerSaved(e) {
 		selectionType = "watchlist";
   setTimeout(getData, 1000);
 }
-function clickHandlerPage(e) {
-		selectionType = "page";
-  setTimeout(getData, 1000);
-}
 
 // Add event listeners once the DOM has fully loaded by listening for the
-// `DOMContentLoaded` event on the document, and adding your listeners to
+// `DOMContentLoaded` event on the document, and adding listeners to
 // specific elements when it triggers.
 document.addEventListener('DOMContentLoaded', function () {
 	document.getElementById('form-input-submit').addEventListener('click', clickHandler);
@@ -203,11 +204,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('search-portfolio-link').addEventListener('click', clickHandlerSaved);
-  getData();
-});
-
-document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('get-from-page').addEventListener('click', clickHandlerPage);
   getData();
 });
 
