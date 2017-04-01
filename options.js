@@ -1,13 +1,11 @@
 // Saves options to chrome.storage.sync.
 function save_options() {
- 	var token = document.getElementById('token').value;
 	var portfolio = document.getElementById('portfolio').value;
   
 	//scrub the portfolio variable of all numbers and punctuation, except comma (,)
 	portfolio = portfolio.replace(/[^A-Za-z,]/g,'');
 	chrome.storage.sync.set({
-	portfolio: portfolio,
-	token: token
+	portfolio: portfolio
   }, function() {
     
 	// Update status to let user know options were saved.
@@ -23,6 +21,7 @@ function list_selection () {
 	var attribute1 = document.getElementById('attribute1').value;
 	var attribute2 = document.getElementById('attribute2').value;
 	var attribute3 = document.getElementById('attribute3').value;
+	
 	chrome.storage.sync.set({
 	attribute1: attribute1,
 	attribute2: attribute2,
@@ -43,13 +42,11 @@ function list_selection () {
 function restored_options() {
   chrome.storage.sync.get({
 	portfolio: null,
-	token: null,
 	attribute1: null,
 	attribute2: null,
 	attribute3: null
   }, function(items) {
 	document.getElementById('portfolio').value = items.portfolio;
-	document.getElementById('token').value = items.token;
 	document.getElementById('attribute1').value = items.attribute1;
 	document.getElementById('attribute2').value = items.attribute2;
 	document.getElementById('attribute3').value = items.attribute3;
@@ -62,9 +59,6 @@ document.addEventListener('DOMContentLoaded', restored_options);
 document.getElementById('save').addEventListener('click',
     save_options);
 
-document.getElementById('apiToken').addEventListener('click',
-    save_options);
-	
 document.getElementById('attribute1').addEventListener('change',
     list_selection);
 
